@@ -12,7 +12,30 @@
 				var price = $('<p class="details price">Price $'+amount+'</p>');
 				vacation.find(".vote").after(price);
 				$(this).remove();
-			});
+
+				var tickets = vacation.find(".tickets");
+				tickets.slideDown();
+				tickets.find(".total").text(amount);
+				tickets.find(".quantity").keyup(function(){
+
+					// Get the price of the vacation
+					// var amount
+
+					// Get the quantity entered
+					var qty = $(this).val();
+
+					// Set the total price to price * quantity
+					tickets.find(".total").text(amount * qty); 
+
+					});
+			});	
+
+			$(".expand").click(function(event){
+				event.preventDefault(); 
+		    	$(".more").slideToggle();
+
+		    }); 
+
 		});
 		</script>
 		<style>
@@ -90,6 +113,7 @@
 				font-weight: bold;
 				cursor: pointer;
 			}
+
 			.price {
 				clear: both;
 				display: block;
@@ -101,18 +125,26 @@
 				background-color: #9fc;
 				margin:0;
 			}
+
 			.tickets {
 				color:white;
+				display:none;
 			}
+
 			.quantity {
 				width: 30px;
 			}
+
+			.more {
+				display:none;
+			}
+
 		</style>
 	</head>
 	<body>
 		<div id="vacations-wrapper">
 			<h1>Vacation Packages</h1>
-			 
+
 			<ul class="sorting">
 				<li><a href="#">America</a></li>
 				<li><a href="#">Europe</a></li>
